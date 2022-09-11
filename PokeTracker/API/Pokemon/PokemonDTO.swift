@@ -1,6 +1,11 @@
 import Foundation
 
 struct PokemonDTO: Codable {
+    enum CodingKeys: String, CodingKey {
+        case isDefault = "is_default"
+        case id, order, name, sprites, types
+    }
+
     struct Sprites: Codable {
         enum CodingKeys: String, CodingKey {
             case frontDefault = "front_default"
@@ -32,7 +37,10 @@ struct PokemonDTO: Codable {
         let name: Type
     }
 
+    let id: Int
+    let order: Int
     let name: String
+    let isDefault: Bool
     let sprites: Sprites
     let types: [TypeWrapper]
 }

@@ -12,8 +12,11 @@ class PokemonListViewModel: ObservableObject {
             fatalError("TODO: Handle error: \(result)")
         }
 
-        let mappedList: [PokemonListEntry] = list.results.map { entry in
-            return .unloaded(UnloadedPokemon(name: entry.name, url: entry.url))
+        let mappedList: [PokemonListEntry] = list.results.enumerated().map { entry in
+            let number = entry.offset + 1
+            let pokemon = entry.element
+            let unloaded = UnloadedPokemon(number: number, name: pokemon.name, url: pokemon.url)
+            return .unloaded(unloaded)
         }
 
         await MainActor.run {
@@ -23,10 +26,6 @@ class PokemonListViewModel: ObservableObject {
 
     func load(_ unloaded: UnloadedPokemon) async {
         print("Loading '\(unloaded.name)'")
-        guard let index = pokemon.firstIndex(where: { $0 == .unloaded(unloaded) }) else {
-            print("Failed to find index of '\(unloaded.name)'")
-            return
-        }
 
         let result = await apiClient.fetch(unloaded.url.request)
         guard case .success(let dto) = result else {
@@ -35,11 +34,13 @@ class PokemonListViewModel: ObservableObject {
         }
 
         let loaded = LoadedPokemon(
+            number: unloaded.number,
             name: dto.name,
             types: dto.types.map({ $0.type.name }),
             spriteUrl: dto.sprites.frontDefault)
 
         await MainActor.run {
+            let index = loaded.number - 1
             pokemon[index] = .loaded(loaded)
         }
     }

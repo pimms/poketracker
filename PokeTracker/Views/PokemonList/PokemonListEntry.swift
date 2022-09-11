@@ -1,11 +1,13 @@
 import Foundation
 
 struct UnloadedPokemon: Hashable {
+    let number: Int
     let name: String
     let url: PokemonURL
 }
 
 struct LoadedPokemon: Hashable {
+    let number: Int
     let name: String
     let types: [Type]
     let spriteUrl: URL?
