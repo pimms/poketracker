@@ -7,7 +7,7 @@ struct EncounterDTO: Codable {
 
     struct VersionDetails: Codable {
         struct Version: Codable {
-            let name: String
+            let name: GameVersion
             let url: URL
         }
 

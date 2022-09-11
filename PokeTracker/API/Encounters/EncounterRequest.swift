@@ -5,7 +5,7 @@ struct EncounterRequest: APIRequest {
     typealias Model = [EncounterDTO]
     let url: URL
 
-    init(path: String) {
-        self.url = Self.makeUrl(path)
+    init(url: URL) {
+        self.url = url
     }
 }

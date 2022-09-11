@@ -4,7 +4,7 @@ struct SpeciesLinkSpecifier: PhantomSpecifier {
     typealias LiteralValue = URL
 }
 
-typealias SpeciesLink = PhantomId<PokemonLinkSpecifier>
+typealias SpeciesLink = PhantomId<SpeciesLinkSpecifier>
 
 extension PhantomIdProtocol where PhantomSpecifierType == SpeciesLinkSpecifier {
     var request: SpeciesRequest {

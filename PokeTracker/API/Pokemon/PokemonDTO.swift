@@ -52,3 +52,16 @@ struct PokemonDTO: Codable {
     let sprites: Sprites
     let types: [TypeWrapper]
 }
+
+extension PokemonDTO {
+    var bestSprite: URL? {
+        return sprites.frontDefault
+            ?? sprites.frontFemale
+            ?? sprites.frontShiny
+            ?? sprites.frontShinyFemale
+            ?? sprites.backDefault
+            ?? sprites.backFemale
+            ?? sprites.backShiny
+            ?? sprites.backShinyFemale
+    }
+}
