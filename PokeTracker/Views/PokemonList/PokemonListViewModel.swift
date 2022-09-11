@@ -7,6 +7,7 @@ class PokemonListViewModel: ObservableObject {
     @Published var pokemon: [PokemonListEntry] = []
 
     func load() async {
+        print("Loading pokemon list...")
         guard pokemon.isEmpty else {
             print("Has already pokemon list");
             return
@@ -24,6 +25,7 @@ class PokemonListViewModel: ObservableObject {
             return .unloaded(unloaded)
         }
 
+        print("Pokemon list loaded!")
         await MainActor.run {
             self.pokemon = mappedList
         }
@@ -39,6 +41,7 @@ class PokemonListViewModel: ObservableObject {
         }
 
         let loaded = LoadedPokemon(
+            id: dto.id,
             number: unloaded.number,
             name: dto.name,
             types: dto.types.map({ $0.type.name }),

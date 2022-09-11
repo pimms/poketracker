@@ -7,6 +7,7 @@ struct UnloadedPokemon: Hashable {
 }
 
 struct LoadedPokemon: Hashable {
+    let id: PokemonId
     let number: Int
     let name: String
     let types: [Type]

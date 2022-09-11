@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 enum NavigationItem: Codable, Hashable {
-    case pokemon(number: Int)
+    case pokemon(number: PokemonId)
 }
 
 struct Navigator {
@@ -10,7 +10,7 @@ struct Navigator {
     static func navigation(for item: NavigationItem) -> some View {
         switch item {
         case .pokemon(number: let id):
-            Text("Pokemon id: \(id)")
+            PokemonDetailView(pokemonId: id)
         }
     }
 }

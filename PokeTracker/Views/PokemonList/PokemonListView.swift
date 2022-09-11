@@ -16,6 +16,7 @@ struct PokemonListView: View {
                     case .unloaded(let unloaded):
                         UnloadedPokemonCell(pokemon: unloaded)
                             .onAppear(perform: { Task { await viewModel.load(unloaded) } })
+                            .onTapGesture(perform: { Task { await viewModel.load(unloaded) } })
                     case .loaded(let loaded):
                         LoadedPokemonCell(pokemon: loaded)
                     }
@@ -63,16 +64,15 @@ private struct UnloadedPokemonCell: View {
     let pokemon: UnloadedPokemon
 
     var body: some View {
-        NavigationLink(value: NavigationItem.pokemon(number: pokemon.number)) {
-            ZStack {
-                PokemonNumberBackdropLabel(number: pokemon.number)
-                VStack {
-                    Spacer()
-                    Text(pokemon.name.capitalized)
+        ZStack {
+            PokemonNumberBackdropLabel(number: pokemon.number)
+            VStack {
+                Spacer()
+                Text(pokemon.name.capitalized)
                         .font(.caption)
-                }
-            }.frame(width: 120, height: 100)
+            }
         }
+        .frame(width: 120, height: 100)
     }
 }
 
@@ -80,7 +80,7 @@ private struct LoadedPokemonCell: View {
     let pokemon: LoadedPokemon
 
     var body: some View {
-        NavigationLink(value: NavigationItem.pokemon(number: pokemon.number)) {
+        NavigationLink(value: NavigationItem.pokemon(number: pokemon.id)) {
         ZStack {
             PokemonNumberBackdropLabel(number: pokemon.number)
             AsyncImage(url: pokemon.spriteUrl) { image in
