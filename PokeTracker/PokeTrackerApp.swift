@@ -25,7 +25,7 @@ struct PokeTrackerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView()
         }
     }
 }

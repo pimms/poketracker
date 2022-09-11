@@ -63,14 +63,16 @@ private struct UnloadedPokemonCell: View {
     let pokemon: UnloadedPokemon
 
     var body: some View {
-        ZStack {
-            PokemonNumberBackdropLabel(number: pokemon.number)
-            VStack {
-                Spacer()
-                Text(pokemon.name.capitalized)
-                    .font(.caption)
-            }
-        }.frame(width: 120, height: 100)
+        NavigationLink(value: NavigationItem.pokemon(number: pokemon.number)) {
+            ZStack {
+                PokemonNumberBackdropLabel(number: pokemon.number)
+                VStack {
+                    Spacer()
+                    Text(pokemon.name.capitalized)
+                        .font(.caption)
+                }
+            }.frame(width: 120, height: 100)
+        }
     }
 }
 
@@ -78,6 +80,7 @@ private struct LoadedPokemonCell: View {
     let pokemon: LoadedPokemon
 
     var body: some View {
+        NavigationLink(value: NavigationItem.pokemon(number: pokemon.number)) {
         ZStack {
             PokemonNumberBackdropLabel(number: pokemon.number)
             AsyncImage(url: pokemon.spriteUrl) { image in
@@ -91,6 +94,7 @@ private struct LoadedPokemonCell: View {
                 Text(pokemon.name.capitalized)
                     .font(.caption)
             }
+        }
         }.frame(width: 120, height: 100)
     }
 }

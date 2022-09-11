@@ -7,6 +7,11 @@ class PokemonListViewModel: ObservableObject {
     @Published var pokemon: [PokemonListEntry] = []
 
     func load() async {
+        guard pokemon.isEmpty else {
+            print("Has already pokemon list");
+            return
+        }
+
         let result = await apiClient.fetch(PokemonListRequest())
         guard case .success(let list) = result else {
             fatalError("TODO: Handle error: \(result)")
