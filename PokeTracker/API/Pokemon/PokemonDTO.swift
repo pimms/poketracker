@@ -3,7 +3,8 @@ import Foundation
 struct PokemonDTO: Codable {
     enum CodingKeys: String, CodingKey {
         case isDefault = "is_default"
-        case id, order, name, sprites, types
+        case locationAreaEncounters = "location_area_encounters"
+        case id, order, name, sprites, types, species
     }
 
     struct Sprites: Codable {
@@ -29,18 +30,25 @@ struct PokemonDTO: Codable {
     }
 
     struct TypeWrapper: Codable {
+        struct WrappedType: Codable {
+            let name: Type
+        }
+
         let slot: Int
-        let type: TypeDTO
+        let type: WrappedType
     }
 
-    struct TypeDTO: Codable {
-        let name: Type
+    struct Species: Codable {
+        let name: String
+        let url: SpeciesLink
     }
 
-    let id: Int
+    let id: PokemonId
     let order: Int
     let name: String
     let isDefault: Bool
+    let species: Species
+    let locationAreaEncounters: EncounterLink
     let sprites: Sprites
     let types: [TypeWrapper]
 }

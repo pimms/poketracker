@@ -5,11 +5,11 @@ struct PokemonRequest: APIRequest {
     let url: URL
 
     init(id: Int) {
-        url = Self.url("/api/v2/pokemon/\(id)")
+        url = Self.makeUrl("/api/v2/pokemon/\(id)")
     }
 
     init(name: String) {
-        url = Self.url("/api/v2/pokemon/\(name.lowercased())")
+        url = Self.makeUrl("/api/v2/pokemon/\(name.lowercased())")
     }
 
     init(url: URL) {

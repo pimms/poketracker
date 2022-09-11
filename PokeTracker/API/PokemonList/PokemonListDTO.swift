@@ -3,7 +3,7 @@ import Foundation
 struct PokemonListDTO: Codable {
     struct Entry: Codable {
         let name: String
-        let url: PokemonURL
+        let url: PokemonLink
     }
 
     let count: Int

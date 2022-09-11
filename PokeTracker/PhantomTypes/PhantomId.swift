@@ -4,7 +4,14 @@ protocol PhantomSpecifier {
     associatedtype LiteralValue: Codable, Hashable
 }
 
-struct PhantomId<T: PhantomSpecifier>: Hashable, Codable {
+protocol PhantomIdProtocol {
+    associatedtype PhantomSpecifierType: PhantomSpecifier
+    var value: PhantomSpecifierType.LiteralValue { get }
+}
+
+struct PhantomId<T: PhantomSpecifier>: PhantomIdProtocol, Hashable, Codable {
+    typealias PhantomSpecifierType = T
+
     let value: T.LiteralValue
 
     init(_ value: T.LiteralValue) {

@@ -2,7 +2,7 @@ import Foundation
 
 struct PokemonListRequest: APIRequest {
     typealias Model = PokemonListDTO
-    var url: URL { Self.url("/api/v2/pokemon?limit=\(limit)&offset=\(offset)") }
+    var url: URL { Self.makeUrl("/api/v2/pokemon?limit=\(limit)&offset=\(offset)") }
 
     private let limit: Int
     private let offset: Int

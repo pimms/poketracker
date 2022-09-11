@@ -3,7 +3,7 @@ import Foundation
 struct UnloadedPokemon: Hashable {
     let number: Int
     let name: String
-    let url: PokemonURL
+    let url: PokemonLink
 }
 
 struct LoadedPokemon: Hashable {
