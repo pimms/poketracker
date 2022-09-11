@@ -1,0 +1,13 @@
+import Foundation
+
+struct PokemonListDTO: Codable {
+    struct Entry: Codable {
+        let name: String
+        let url: PokemonURL
+    }
+
+    let count: Int
+    let next: URL?
+    let previous: URL?
+    let results: [Entry]
+}

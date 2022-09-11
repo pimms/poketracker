@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct PokeTrackerApp: App {
     init() {
+        /*
         #if DEBUG
         var injectionBundlePath = "/Applications/InjectionIII.app/Contents/Resources"
         #if targetEnvironment(macCatalyst)
@@ -19,6 +20,7 @@ struct PokeTrackerApp: App {
         #endif
         Bundle(path: injectionBundlePath)?.load()
         #endif
+         */
     }
 
     var body: some Scene {
